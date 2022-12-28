@@ -2,6 +2,7 @@ import styled from "styled-components";
 import bg from "../images/pattern-bg.png";
 import search from "../images/icon-arrow.svg";
 import { useState } from "react";
+import Results from "./results";
 
 export default function Header() {
   const [search, setSearch] = useState("");
@@ -22,6 +23,7 @@ export default function Header() {
         />
         <SearchBtn type="submit"></SearchBtn>
       </Form>
+      <Results search={search} setSearch={setSearch} />
     </Wrapper>
   );
 }
@@ -36,6 +38,7 @@ const Wrapper = styled.section`
   display: flex;
   flex-direction: column;
   gap: 25px;
+  max-height: 300px;
 `;
 
 const Title = styled.h1`

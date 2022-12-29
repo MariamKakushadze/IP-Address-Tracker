@@ -1,3 +1,7 @@
+# Frontend Mentor - IP address tracker
+
+![Design preview for the IP address tracker coding challenge](./src/images/desktop-preview.jpg)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

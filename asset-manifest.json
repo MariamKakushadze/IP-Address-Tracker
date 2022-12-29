@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/IP-Address-Tracker.git/static/css/main.a189e101.css",
+    "main.js": "/IP-Address-Tracker.git/static/js/main.6a83b6cd.js",
+    "static/media/pattern-bg.png": "/IP-Address-Tracker.git/static/media/pattern-bg.a60a3c85aa8b88aac4b7.png",
+    "index.html": "/IP-Address-Tracker.git/index.html",
+    "static/media/icon-arrow.svg": "/IP-Address-Tracker.git/static/media/icon-arrow.2eaaa5ee3602d5aa14a2dba69e9fb7a0.svg",
+    "main.a189e101.css.map": "/IP-Address-Tracker.git/static/css/main.a189e101.css.map",
+    "main.6a83b6cd.js.map": "/IP-Address-Tracker.git/static/js/main.6a83b6cd.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a189e101.css",
+    "static/js/main.6a83b6cd.js"
+  ]
+}

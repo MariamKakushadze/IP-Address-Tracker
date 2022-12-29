@@ -1,46 +1,26 @@
 import styled from "styled-components";
-import { useState, useEffect } from "react";
-import axios from "axios";
 
 export default function Results(props) {
-  const [data, setData] = useState(null);
-
-  useEffect(() => {
-    const userData = async () => {
-      try {
-        const { data } = await axios?.get(
-          `https://geo.ipify.org/api/v2/country,city?apiKey=at_xkmVukvrZspLLTw9G0WK7EMy9DKLy&ipAddress=${props.search}`
-        );
-        setData(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    userData();
-  }, [props.search]);
-
-  if (!data) return null;
-  console.log(data);
   return (
     <ResultsContainer>
       <Datas>
         <Headding>IP ADDRESS</Headding>
-        <Result>{data.ip}</Result>
+        <Result> {props.data.ip}</Result>
       </Datas>
       <Datas>
         <Headding>LOCATION</Headding>
         <Result>
-          {data.location.city}, {data.location.country}{" "}
-          {data.location.postalCode}
+          {props.data.location.city}, {props.data.location.country}{" "}
+          {props.data.location.postalCode}
         </Result>
       </Datas>
       <Datas>
         <Headding>TIMEZONE</Headding>
-        <Result>UTC {data.location.timezone}</Result>
+        <Result>UTC {props.data.location.timezone}</Result>
       </Datas>
       <Datas>
         <Headding>ISP</Headding>
-        <Result>{data.isp}</Result>
+        <Result>{props.data.isp} Magticom</Result>
       </Datas>
     </ResultsContainer>
   );
@@ -55,11 +35,21 @@ const ResultsContainer = styled.div`
   box-shadow: 0px 50px 50px -25px rgba(0, 0, 0, 0.0983665);
   border-radius: 15px;
   width: 100%;
+  @media (min-width: 1000px) {
+    width: 77%;
+    padding: 37px 32px;
+    flex-direction: row;
+    margin-top: 30px;
+    justify-content: space-between;
+  }
 `;
 const Datas = styled.div`
   display: flex;
   flex-direction: column;
   gap: 7px;
+  @media (min-width: 1000px) {
+    gap: 13px;
+  }
 `;
 const Headding = styled.h4`
   font-size: 10px;
@@ -68,11 +58,26 @@ const Headding = styled.h4`
   color: #2c2c2c;
   mix-blend-mode: normal;
   opacity: 0.5;
+  @media (min-width: 1000px) {
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 14px;
+    letter-spacing: 1.75px;
+    text-transform: uppercase;
+    text-align: left;
+    margin: 0;
+  }
 `;
 const Result = styled.span`
-  font-weight: 700;
   font-size: 20px;
   line-height: 24px;
   letter-spacing: -0.178571px;
   color: #2c2c2c;
+  @media (min-width: 1000px) {
+    font-size: 26px;
+    line-height: 30px;
+    letter-spacing: -0.232143px;
+    text-align: left;
+    margin: 0;
+  }
 `;

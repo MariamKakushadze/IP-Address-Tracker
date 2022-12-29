@@ -1,30 +1,61 @@
 import styled from "styled-components";
 import bg from "../images/pattern-bg.png";
 import search from "../images/icon-arrow.svg";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Results from "./results";
+import Map from "./map";
+import axios from "axios";
 
-export default function Header() {
+export default function Main() {
   const [search, setSearch] = useState("");
+  const [data, setData] = useState(null);
 
   const searchHandler = (e) => {
     e.preventDefault();
     setSearch(e.target.search.value);
   };
 
+  useEffect(() => {
+    const userData = async () => {
+      try {
+        const { data } = await axios?.get(
+          `https://geo.ipify.org/api/v2/country,city?apiKey=at_xkmVukvrZspLLTw9G0WK7EMy9DKLy&ipAddress=${search}`
+        );
+        setData(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    userData();
+  }, [search]);
+
+  if (!data) return null;
+
   return (
-    <Wrapper>
-      <Title>IP Address Tracker</Title>
-      <Form onSubmit={searchHandler} autoComplete="off">
-        <SearchInput
-          type="search"
-          id="search"
-          placeholder="Search for any IP address"
+    <>
+      <Wrapper
+        style={{
+          zIndex: "2",
+        }}
+      >
+        <Title>IP Address Tracker</Title>
+        <Form onSubmit={searchHandler} autoComplete="off">
+          <SearchInput
+            type="search"
+            id="search"
+            placeholder="Search for any IP address"
+          />
+          <SearchBtn type="submit"></SearchBtn>
+        </Form>
+        <Results
+          search={search}
+          setSearch={setSearch}
+          data={data}
+          setData={setData}
         />
-        <SearchBtn type="submit"></SearchBtn>
-      </Form>
-      <Results search={search} setSearch={setSearch} />
-    </Wrapper>
+      </Wrapper>
+      <Map data={data} />
+    </>
   );
 }
 const Form = styled.form`
@@ -33,12 +64,20 @@ const Form = styled.form`
 
 const Wrapper = styled.section`
   background: url(${bg});
+  background-repeat: no-repeat;
+  background-size: cover;
   padding: 30px;
   text-align: center;
   display: flex;
   flex-direction: column;
   gap: 25px;
   max-height: 300px;
+  height: 35vh;
+  position: relative;
+  z-index: "2";
+  @media (min-width: 1000px) {
+    gap: 30px;
+  }
 `;
 
 const Title = styled.h1`
@@ -47,6 +86,11 @@ const Title = styled.h1`
   letter-spacing: -0.232143px;
   color: #ffffff;
   margin: 0;
+  @media (min-width: 1000px) {
+    font-size: 32px;
+    line-height: 30px;
+    letter-spacing: -0.285714px;
+  }
 `;
 
 const SearchBtn = styled.button`
@@ -83,4 +127,9 @@ const SearchInput = styled.input`
   height: 58px;
   cursor: pointer;
   outline: none;
+  font-size: 32px;
+  @media (min-width: 1000px) {
+    width: 555px;
+    padding: 18px 24px;
+  }
 `;
